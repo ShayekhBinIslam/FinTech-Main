@@ -4,7 +4,8 @@ import "./app.css"
 import Topbar from "./components/topbar/Topbar";
 import Income from "./Pages/income/Income";
 import Login from "./Pages/login/Login";
-import Addincome from "./Pages/addincome/Addincome";
+import AddOneTimeincome from "./Pages/addincome/AddOneTimeincome";
+import AddPeriodicincome from "./Pages/addincome/AddPeriodicincome";
 import Editincome from "./Pages/editincome/Editincome";
 
 import {
@@ -21,7 +22,8 @@ function App() {
 
           <Route path="/" element={<Login/>}/>
           <Route path="/income" element={<Income/>}/>
-          <Route path="/income/addincome" element={<Addincome/>}/>
+          <Route path="/income/add_one_time_income" element={<AddOneTimeincome/>}/>
+          <Route path="/income/add_periodic_income" element={<AddPeriodicincome/>}/>
           <Route path="/income/editincome" element={<Editincome/>}/>
 
         </Routes>

@@ -4,7 +4,7 @@ import "./signup.css";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Addincomeform() {
+export default function AddPeriodicincomeform() {
   const initialValues = {username : "", email : "", password: ""};  
   const [formValues, setFromValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
