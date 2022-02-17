@@ -4,7 +4,7 @@ import "./signup.css";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Loginform() {
+export default function Editincomeform() {
   const initialValues = {username : "", email : "", password: ""};  
   const [formValues, setFromValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -71,7 +71,7 @@ export default function Loginform() {
       )}      */}
 
       <form onSubmit={handleSubmit}>
-          <h1>Log in Form</h1>
+          <h1>Edit Incomes</h1>
           <div className="uidivider"></div>
           <div className="uiform">
               

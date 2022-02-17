@@ -4,7 +4,7 @@ import "./signup.css";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Loginform() {
+export default function Addincomeform() {
   const initialValues = {username : "", email : "", password: ""};  
   const [formValues, setFromValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -71,12 +71,12 @@ export default function Loginform() {
       )}      */}
 
       <form onSubmit={handleSubmit}>
-          <h1>Log in Form</h1>
+          <h1>Add new Income</h1>
           <div className="uidivider"></div>
           <div className="uiform">
               
               <div className="field">
-                  <label>Username</label>
+                  <label>Title</label>
                   <input 
                     type="text" 
                     name="username" 
@@ -112,7 +112,7 @@ export default function Loginform() {
               <p>{ formErrors.password }</p>  
 
               <button className="button-33" role="button">
-                  Submit
+                  Save Income
               </button>
           </div>
       </form>
