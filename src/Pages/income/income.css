@@ -1,0 +1,7 @@
+.income{
+    flex: 4;
+}
+
+.incomeParent{
+    display: flex;
+}
