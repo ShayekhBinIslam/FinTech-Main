@@ -14,4 +14,8 @@ module.exports = class Income{
         //THIS CAN BE EDITED ACCORDING TO PASSING INFO
         db.execute("INSERT INTO INCOME(TITLE,AMMOUNT,DESCRIPTION,CATAGORY) VALUES ('"+ title+ "','"+ ammount+ "','"+ description+ "','"+ catagory+ "')");
     }
+    static editIncome(title,ammount,clientID){
+        //UPDATE QUERY HERE
+        //db.execute("UPDATE INCOME SET(TITLE,AMMOUNT,DESCRIPTION,CATAGORY) VALUES ('"+ title+ "','"+ ammount+ "','"+ description+ "','"+ catagory+ "')");
+    }
 }
