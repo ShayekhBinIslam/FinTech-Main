@@ -50,7 +50,7 @@ export default function Income() {
       </div>
       <div className='income'>
         <Featuredinfo/>
-        {/* <Chart/> */}
+        <Chart/>
         <Incometable/>
       </div>
       <div className='incomelist'>
