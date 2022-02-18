@@ -1,121 +1,94 @@
+
 import React from 'react';
-import { useState, useEffect } from 'react';
-import "./signup.css";
-import { useNavigate } from "react-router-dom";
+import { Row, Form, Col, Button } from 'react-bootstrap';
 
-
-export default function Editincomeform() {
-  const initialValues = {username : "", email : "", password: ""};  
-  const [formValues, setFromValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [ isSubmit, setIsSubmit] = useState(false);  
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFromValues({ ...formValues, [name]: value });
-  };   
-
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmit(true);
-
-      if(Object.keys(formErrors).length === 0 && isSubmit){
-        navigate("./income");
-      }
-  };
-
-  useEffect(() => {
-    if(Object.keys(formErrors).length === 0 && isSubmit){
-        console.log(formValues);    
+class Editincomeform extends React.Component {
+  constructor(props) {
+    super(props);
+    this.initialState = {
+      id: '',
+      productName: '',
+      price: '',
+      sku: ''
     }
-  }, [formErrors]);
 
-  const validate = (values) => {
-      const errors = {};
-      const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      if(!values.username){
-          errors.username = "Username is required!";
-      }
-      if(!values.email){
-        errors.email = "Email is required!";
-      }
-      else if(!regex.test(values.email)){
-        errors.email = "This is not a valid email!";
-      }
-      if(!values.password){
-        errors.password = "Pasword is required!";
-      }
-      else if(values.password.length < 4){
-          errors.password = "Password must be more than 4 characters"
-      }
+    if(props.product){
+      this.state = props.product
+    } else {
+      this.state = this.initialState;
+    }
 
-      return errors;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  };
+  handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
 
+    this.setState({
+      [name]: value
+    })
+  }
 
-  return (
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onFormSubmit(this.state);
+    this.setState(this.initialState);
+  }
 
-    <div className='logincontainer'>
+  render() {
 
+    let pageTitle;
+    if(this.state.id) {
+      pageTitle = <h2>Edit Product</h2>
+    } else {
+      pageTitle = <h2>Add Product</h2>
+    }
 
-      {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
-          <div className='successmsg'> Signed in successfully</div> 
-          
-      ) : (
-        // <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-        <pre></pre>
-      )}      */}
-
-      <form onSubmit={handleSubmit}>
-          <h1>Edit Incomes</h1>
-          <div className="uidivider"></div>
-          <div className="uiform">
-              
-              <div className="field">
-                  <label>Username</label>
-                  <input 
-                    type="text" 
-                    name="username" 
-                    placeholder='Username' 
-                    value={ formValues.username} 
-                    onChange={handleChange}
-                  />
-              </div>
-              <p>{ formErrors.username }</p>
-              
-              <div className="field">
-                  <label>Email</label>
-                  <input 
-                    type="email" 
-                    name="email" 
-                    placeholder='Email' 
-                    value={ formValues.email}
-                    onChange={handleChange}
-                  />
-              </div>
-              <p>{ formErrors.email }</p>
-
-              <div className="field">
-                  <label>Password</label>
-                  <input 
-                    type="password" 
-                    name="password"
-                    placeholder='Password' 
-                    value={ formValues.password} 
-                    onChange={handleChange}
-                  />
-              </div>
-              <p>{ formErrors.password }</p>  
-
-              <button className="button-33" role="button">
-                  Submit
-              </button>
-          </div>
-      </form>
-    </div>
-  );
+    return(
+      <div>
+        {pageTitle}
+        <Row>
+          <Col sm={6}>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group controlId="productName">
+                <Form.Label>Product Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="productName"
+                  value={this.state.productName}
+                  onChange={this.handleChange}
+                  placeholder="Product Name"/>
+              </Form.Group>
+              <Form.Group controlId="sku">
+                <Form.Label>SKU</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="sku"
+                  value={this.state.sku}
+                  onChange={this.handleChange}
+                  placeholder="SKU" />
+              </Form.Group>
+              <Form.Group controlId="price">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="price"
+                  value={this.state.price}
+                  onChange={this.handleChange}
+                  placeholder="Price" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control type="hidden" name="id" value={this.state.id} />
+                <Button variant="success" type="submit">Save</Button>
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+      </div>
+    )
+  }
 }
+
+export default Editincomeform;
