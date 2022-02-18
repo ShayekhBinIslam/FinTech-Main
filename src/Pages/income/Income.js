@@ -64,7 +64,8 @@ export default function Income() {
             </div> 
           
           ) : (
-          <pre></pre>
+          <div></div>
+          // <pre></pre>
            )}
           {/* <span className='buttontitle'>Modify Existing Incomes</span> */}
           <button className="button-33" role="button" onClick={gotoEditincome}> Edit Income List</button>

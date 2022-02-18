@@ -1,31 +1,19 @@
 
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
+import { incomeList } from './JsonList';
 
 class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
-      products: []
+      products: incomeList
     }
   }
 
   componentDidMount() {
-    const apiUrl = 'http://localhost/dev/tcxapp/reactapi/products';
-
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            products: result
-          });
-        },
-        (error) => {
-          this.setState({ error });
-        }
-      )
+    this.state.products = incomeList;
   }
 
   render() {
@@ -38,24 +26,25 @@ class List extends React.Component {
     } else {
       return(
         <div>
-          <h2>Product List</h2>
+          <h2>Income List</h2>
           <Table>
             <thead>
               <tr>
-                <th>#ID</th>
-                <th>Product Name</th>
-                <th>SKU</th>
-                <th>Price</th>
-                <th>Action</th>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Period</th>
+                <th>End Date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {products.map(product => (
                 <tr key={product.id}>
-                  <td>{product.id}</td>
-                  <td>{product.product_name}</td>
-                  <td>{product.sku}</td>
-                  <td>{product.price}</td>
+                  <td>{product.title}</td>
+                  <td>{product.amount}</td>
+                  <td>{product.period}</td>
+                  <td>{product.end}</td>
+                  <td>{product.status}</td>
                   <td><Button variant="info" onClick={() => this.props.editProduct(product.id)}>Edit</Button></td>
                 </tr>
               ))}

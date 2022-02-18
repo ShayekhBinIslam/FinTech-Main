@@ -1,31 +1,14 @@
-// import React from 'react';
-
-// import Editincomeform from '../../components/forms/Editincomeform';
-
-
-
-// export default function Editincome() {
-
-//   return (
-//     <div className='addincomeParent'>
-//       <Editincomeform/>
-//     </div>
-//   );
-// }
-
-
 
 import React, { Component } from 'react';
 import '../../components/forms/editincome.css';
 import { Container, Button, Alert } from 'react-bootstrap';
-import ProductList from '../../components/forms/list';
-import AddProduct from '../../components/forms/Editincomeform';
+import List from '../../components/forms/list';
+import EditProduct from '../../components/forms/Editincomeform';
 
 class Editincome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAddProduct: false,
       error: null,
       response: {},
       product: {},
@@ -35,45 +18,44 @@ class Editincome extends Component {
   }
 
   onCreate() {
-    this.setState({ isAddProduct: true });
+    this.setState({ isEditProduct: false });
   }
 
   onFormSubmit(data) {
-    let apiUrl;
+    // let apiUrl;
 
-    if(this.state.isEditProduct){
-      apiUrl = 'http://localhost/dev/tcxapp/reactapi/editProduct';
-    } else {
-      apiUrl = 'http://localhost/dev/tcxapp/reactapi/createProduct';
-    }
+    // if(this.state.isEditProduct){
+    //   apiUrl = 'http://localhost/dev/tcxapp/reactapi/editProduct';
+    // } else {
+    //   apiUrl = 'http://localhost/dev/tcxapp/reactapi/createProduct';
+    // }
 
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+    // const myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
 
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      myHeaders
-    };
+    // const options = {
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    //   myHeaders
+    // };
 
-    fetch(apiUrl, options)
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          response: result,
-          isAddProduct: false,
-          isEditProduct: false
-        })
-      },
-      (error) => {
-        this.setState({ error });
-      }
-    )
+    // fetch(apiUrl, options)
+    //   .then(res => res.json())
+    //   .then(result => {
+    //     this.setState({
+    //       response: result,
+    //       isEditProduct: false
+    //     })
+    //   },
+    //   (error) => {
+    //     this.setState({ error });
+    //   }
+    // )
   }
 
   editProduct = productId => {
 
-    const apiUrl = 'http://localhost/dev/tcxapp/reactapi/getProduct';
+    // const apiUrl = 'http://localhost/dev/tcxapp/reactapi/getProduct';
     const formData = new FormData();
     formData.append('productId', productId);
 
@@ -82,36 +64,36 @@ class Editincome extends Component {
       body: formData
     }
 
-    fetch(apiUrl, options)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            product: result,
-            isEditProduct: true,
-            isAddProduct: true
-          });
-        },
-        (error) => {
-          this.setState({ error });
-        }
-      )
+    // fetch(apiUrl, options)
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       this.setState({
+    //         product: result,
+    //         isEditProduct: true,
+    //       });
+    //     },
+    //     (error) => {
+    //       this.setState({ error });
+    //     }
+    //   )
+
+    this.state.isEditProduct = true;
   }
 
   render() {
 
     let productForm;
-    if(this.state.isAddProduct || this.state.isEditProduct) {
-      productForm = <AddProduct onFormSubmit={this.onFormSubmit} product={this.state.product} />
+    if(this.state.isEditProduct) {
+      productForm = <EditProduct onFormSubmit={this.onFormSubmit} product={this.state.product} />
     }
 
     return (
       <div className="App">
         <Container>
-          <h1 style={{textAlign:'center'}}>React Tutorial</h1>
-          {!this.state.isAddProduct && <Button variant="primary" onClick={() => this.onCreate()}>Add Product</Button>}
+          {/* <h1 style={{textAlign:'center'}}>Income List</h1> */}
           {this.state.response.status === 'success' && <div><br /><Alert variant="info">{this.state.response.message}</Alert></div>}
-          {!this.state.isAddProduct && <ProductList editProduct={this.editProduct}/>}
+          {!this.state.isEditProduct && <List editProduct={this.state.product}/>}
           { productForm }
           {this.state.error && <div>Error: {this.state.error.message}</div>}
         </Container>
