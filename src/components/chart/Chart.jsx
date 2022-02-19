@@ -29,6 +29,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import faker from 'faker';
+import Box from '@mui/material/Box';
 
 
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -55,11 +56,12 @@ export const options = {
   plugins: {
     legend: {
       // position: 'top' as const,
-      position: 'top',
+      // position: 'top',
+      display: false,
     },
     title: {
-      display: true,
-      text: 'Chart.js Line Chart',
+      display: false,
+      // text: 'Chart.js Line Chart',
     },
   },
 };
@@ -71,16 +73,16 @@ export const data = {
   datasets: [
     {
       label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      data: labels.map(() => faker.datatype.number({ min: 100, max: 100000 })),
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
+    // {
+    //   label: 'Dataset 2',
+    //   data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+    //   borderColor: 'rgb(53, 162, 235)',
+    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    // },
   ],
 };
 
@@ -100,7 +102,8 @@ const StyledMenu = styled((props) => (
     }}
     {...props}
   />
-))(({ theme }) => ({
+))
+(({ theme }) => ({
   '& .MuiPaper-root': {
     borderRadius: 6,
     marginTop: theme.spacing(1),
@@ -128,6 +131,21 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+function handlePrevious() {
+  console.log("Previous clicked");
+}
+
+function handleNext() {
+  console.log("Next clicked");
+}
+
+function handleMonthly() {
+  console.log("Monthly clicked");
+}
+
+function handleYearly() {
+  console.log("Yearly clicked");
+}
 
 export default function Chart() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -145,20 +163,29 @@ export default function Chart() {
   return (
     <div className='chart'>
       <h3 className="chartTitle">Income Graph</h3>
-      <div
-
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          p: 1,
+          m: 1,
+          bgcolor: 'background.paper',
+          borderRadius: 1,
+        }}
       >
+
+      
+      <Box>
         {/* Monthly or yearly */}
         <ButtonGroup variant="contained" aria-label="outlined primary button group"
-
         >
           <Button>Monthly</Button>
           <Button>Yearly</Button>
         </ButtonGroup>
-      </div>
+      </Box>
 
       {/* Selected span: monthly: 6 month, yearly: 4-5 years */}
-      <div>
+      <Box>
         <Button
           id="demo-customized-button"
           aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -169,31 +196,43 @@ export default function Chart() {
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
         >
-          Options
+          6 month
         </Button>
-        <StyledMenu
-          id="demo-customized-menu"
-          MenuListProps={{
-            'aria-labelledby': 'demo-customized-button',
-          }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
+        <StyledMenu id="demo-customized-menu" MenuListProps={{'aria-labelledby': 'demo-customized-button',}}
+          anchorEl={anchorEl} open={open} onClose={handleClose}
         >
-          <MenuItem
-          onClick={handleClose}
-          disableRipple>
-            <EditIcon />
-            6 month
-          </MenuItem>
-          <MenuItem
-          onClick={handleClose}
-          disableRipple>
-            <FileCopyIcon />
-            10 month
-          </MenuItem>
+          <MenuItem onClick={handleClose} disableRipple> 6 month </MenuItem>
+          <MenuItem onClick={handleClose} disableRipple> 10 month </MenuItem>
         </StyledMenu>
-      </div>
+      </Box>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          // justifyContent: 'space-around',
+          justifyContent: 'center',
+          p: 1,
+          m: 1,
+          bgcolor: 'background.paper',
+          borderRadius: 1,
+        }}
+      >
+      <Box>
+        {/* Monthly or yearly */}
+        <ButtonGroup variant="contained" aria-label="outlined primary button group"
+        >
+          <Button onClick={handlePrevious}>Previous</Button>
+          <Button onClick={handleNext}>Next</Button>
+        </ButtonGroup>
+      </Box>
+      <Box>
+      </Box>
+
+      </Box>
+
+
+
+
       {/* Line plot */}
       <Line options={options} data={data} />
 
