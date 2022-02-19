@@ -1,16 +1,16 @@
-const mysql = require("mysql2");
-// const config = require("../config/connfig_income.json");
+// const mysql = require("mysql2");
+// // const config = require("../config/connfig_income.json");
 
-const pool = mysql.createPool({
-    // host: config.host,
-    // user: config.user,
-    // database: config.database,
-    // password: config.password,
+// const pool = mysql.createPool({
+//     // host: config.host,
+//     // user: config.user,
+//     // database: config.database,
+//     // password: config.password,
 
-    host: "localhost",
-    user: "root",
-    database: "mydb",
-    password: "1234",
-});
+//     host: "localhost",
+//     user: "root",
+//     database: "mydb",
+//     password: "Hello123!",
+// });
 
-module.exports = pool.promise();
+// module.exports = pool.promise();

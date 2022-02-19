@@ -24,12 +24,12 @@ export default function Loginform() {
       setIsSubmit(true);
 
 
-      if(user.loginAuth(formValues.username, formValues.email, formValues.password)){
+      // if(user.loginAuth(formValues.username, formValues.email, formValues.password)){
 
         if(Object.keys(formErrors).length === 0 && isSubmit){
           navigate("./income");
         }
-      }
+      // }
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function Loginform() {
       )}      */}
 
       <form onSubmit={handleSubmit}>
-          <h1>Log in Form</h1>
+          <h1>Log in</h1>
           <div className="uidivider"></div>
           <div className="uiform">
               
