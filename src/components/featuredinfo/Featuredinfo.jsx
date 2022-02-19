@@ -7,7 +7,7 @@ import {ArrowDownward, ArrowUpward} from '@mui/icons-material';
 export default function Featuredinfo() {
   return (
     <div className='featured'>
-      <div className="featuredItem">
+      <div className="button-34">
           <span className="featuredTitle">Yearly Income</span>
           <div className="featuredMoneyContainer">
             <span className="featureMoney">100 TK</span>
@@ -18,7 +18,7 @@ export default function Featuredinfo() {
           <span className="featureSub">compare to last year</span>
       </div>
 
-      <div className="featuredItem">
+      <div className="button-341">
           <span className="featuredTitle">Yearly Income</span>
           <div className="featuredMoneyContainer">
             <span className="featureMoney">100 TK</span>
@@ -29,7 +29,7 @@ export default function Featuredinfo() {
           <span className="featureSub">compare to last year</span>
       </div>
 
-      <div className="featuredItem">
+      <div className="button-342">
           <span className="featuredTitle">Yearly Income</span>
           <div className="featuredMoneyContainer">
             <span className="featureMoney">100 TK</span>

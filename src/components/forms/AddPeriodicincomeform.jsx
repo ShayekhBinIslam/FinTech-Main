@@ -96,7 +96,7 @@ export default function AddPeriodicincomeform() {
               <div className="field">
                   <label>Amount</label>
                   <input 
-                    type="amount" 
+                    type="text" 
                     name="amount" 
                     placeholder='Amount' 
                     value={ formValues.amount}
@@ -108,7 +108,7 @@ export default function AddPeriodicincomeform() {
               <div className="field">
                   <label>Period</label>
                   <input 
-                    type="period" 
+                    type="text" 
                     name="period" 
                     placeholder='Period' 
                     value={ formValues.period}
@@ -131,7 +131,7 @@ export default function AddPeriodicincomeform() {
               <div className="field">
                   <label>Short Describsion</label>
                   <input 
-                    type="shortdsc" 
+                    type="text" 
                     name="shortdsc"
                     placeholder='Shortdsc' 
                     value={ formValues.shortdsc} 

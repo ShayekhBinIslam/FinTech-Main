@@ -82,7 +82,7 @@ export default function AddOneTimeincomeform() {
               <div className="field">
                   <label>Amount</label>
                   <input 
-                    type="amount" 
+                    type="text" 
                     name="amount" 
                     placeholder='Amount' 
                     value={ formValues.amount}
@@ -94,7 +94,7 @@ export default function AddOneTimeincomeform() {
               <div className="field">
                   <label>Short Describsion</label>
                   <input 
-                    type="shortdsc" 
+                    type="text" 
                     name="shortdsc"
                     placeholder='Shortdsc' 
                     value={ formValues.shortdsc} 

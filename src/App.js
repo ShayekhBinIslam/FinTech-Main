@@ -1,6 +1,6 @@
 import React from "react";
 import "./app.css"
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 import Topbar from "./components/topbar/Topbar";
 import Income from "./Pages/income/Income";
@@ -16,9 +16,9 @@ import {
 
 function App() {
   return (
-    <div className="app">
+    <div className="fintech">
       <Topbar/>
-      <div className="container">
+      <div className="appcontainer">
         <Routes>
 
           <Route path="/" element={<Login/>}/>

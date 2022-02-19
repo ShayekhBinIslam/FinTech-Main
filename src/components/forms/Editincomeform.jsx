@@ -1,15 +1,20 @@
 
 import React from 'react';
 import { Row, Form, Col, Button } from 'react-bootstrap';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 class Editincomeform extends React.Component {
   constructor(props) {
     super(props);
     this.initialState = {
       id: '',
-      productName: '',
-      price: '',
-      sku: ''
+      title: '',
+      amount: '',
+      period: '',
+      end: '',
+      status: ''
     }
 
     if(props.product){
@@ -20,6 +25,7 @@ class Editincomeform extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -47,37 +53,43 @@ class Editincomeform extends React.Component {
     }
 
     return(
-      <div>
+      <div >
         {pageTitle}
         <Row>
           <Col sm={6}>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Group controlId="productName">
-                <Form.Label>Product Name</Form.Label>
+              <Form.Group controlId="title">
+                <Form.Label>Title</Form.Label>
                 <Form.Control
                   type="text"
-                  name="productName"
-                  value={this.state.productName}
+                  name="title"
+                  value={this.state.title}
                   onChange={this.handleChange}
-                  placeholder="Product Name"/>
+                  placeholder="Title"/>
               </Form.Group>
-              <Form.Group controlId="sku">
-                <Form.Label>SKU</Form.Label>
+              <Form.Group controlId="amount">
+                <Form.Label>Amount</Form.Label>
                 <Form.Control
                   type="text"
-                  name="sku"
-                  value={this.state.sku}
+                  name="amount"
+                  value={this.state.amount}
                   onChange={this.handleChange}
-                  placeholder="SKU" />
+                  placeholder="Amount" />
               </Form.Group>
-              <Form.Group controlId="price">
-                <Form.Label>Price</Form.Label>
+              <Form.Group controlId="period">
+                <Form.Label>Period</Form.Label>
                 <Form.Control
                   type="text"
-                  name="price"
-                  value={this.state.price}
+                  name="period"
+                  value={this.state.period}
                   onChange={this.handleChange}
-                  placeholder="Price" />
+                  placeholder="Period" />
+              </Form.Group>
+              <Form.Group controlId="period">
+                <Form.Label>End Date</Form.Label>
+                <DatePicker 
+                  selected={this.state.end} 
+                  onChange={(date) => this.state.end = (date)} />
               </Form.Group>
               <Form.Group>
                 <Form.Control type="hidden" name="id" value={this.state.id} />
