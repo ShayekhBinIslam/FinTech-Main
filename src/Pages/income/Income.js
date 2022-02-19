@@ -35,11 +35,6 @@ export default function Income() {
   const gotoEditincomePeriodic = (e) => {
     navigate("./add_periodic_income");
   };
-
-
-  const gotoEditincome = (e) => {
-      navigate("./editincome");
-  };
   
 
 
@@ -56,7 +51,7 @@ export default function Income() {
       <div className='incomelist'>
         <div className='buttonList'>
           {/* <span className='buttontitle'>Add New Income</span> */}
-          <button className="button-33" role="button" onClick={gotoAddincome}> Add Income</button> 
+          <button className="featuredItem3" role="button" onClick={gotoAddincome}> + Add Income</button> 
           {isAdd ? (
             <div className='incomebuttons'> 
               <button className="button-29" role="button" onClick={gotoAddincomeOneTime}> One Time</button> 
@@ -68,7 +63,6 @@ export default function Income() {
           // <pre></pre>
            )}
           {/* <span className='buttontitle'>Modify Existing Incomes</span> */}
-          <button className="button-33" role="button" onClick={gotoEditincome}> Edit Income List</button>
           
         </div>
         <IncomeListTable/>

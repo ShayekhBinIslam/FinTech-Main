@@ -3,6 +3,8 @@ import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { incomeList } from './JsonList';
 
+import '../../components/forms/editincome.css';
+
 class List extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +27,7 @@ class List extends React.Component {
       )
     } else {
       return(
-        <div>
+        <div className='incometable'>
           <h2>Income List</h2>
           <Table>
             <thead>

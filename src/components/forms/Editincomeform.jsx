@@ -53,7 +53,7 @@ class Editincomeform extends React.Component {
     }
 
     return(
-      <div>
+      <div >
         {pageTitle}
         <Row>
           <Col sm={6}>

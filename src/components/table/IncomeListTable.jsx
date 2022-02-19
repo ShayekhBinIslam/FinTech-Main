@@ -4,6 +4,10 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
 import { incomeList } from '../../components/forms/JsonList';
 import { Table } from 'react-bootstrap';
+import './incometable.css';
+
+import { useNavigate } from "react-router-dom";
+
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -20,13 +24,24 @@ const columns: GridColDef[] = [
 export default function IncomeListTable() {
   const products = incomeList;
 
+  const navigate = useNavigate();
+
+  const gotoEditincome = (e) => {
+    navigate("./editincome");
+  };
+
   return (
     // <div style={{ height: 300, width: '100%' }}>
     //   <DataGrid rows={rows} columns={columns} />
     // </div>
-    <div>
-          <h3>Income List</h3>
-          <Table striped bordered hover>
+    <div className='incometable'>
+          <div className='incometitlebutton'>
+            <h3>Income List</h3>
+            <button className="button-33" role="button" onClick={gotoEditincome}> Edit</button>
+          </div>
+          
+
+          <Table>
             <thead>
               <tr>
                 <th>Title</th>

@@ -77,7 +77,7 @@ export default function Loginform() {
               
               <div className="field">
                   <label>Username</label>
-                  <input 
+                  <input className='inputform'
                     type="text" 
                     name="username" 
                     placeholder='Username' 

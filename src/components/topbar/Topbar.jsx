@@ -4,7 +4,7 @@ import {NotificationsNone, Settings} from '@mui/icons-material';
 
 export default function Topbar() {
   return (
-    <div className='topbar'>
+    <div className='button-30'>
       <div className="topbarWrapper">
           <div className="topLeft">
               <span className='logo'>FinTech</span>
