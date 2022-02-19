@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
+const user = require('../../models/User');
 
 
 export default function Loginform() {
@@ -22,8 +23,12 @@ export default function Loginform() {
       setFormErrors(validate(formValues));
       setIsSubmit(true);
 
-      if(Object.keys(formErrors).length === 0 && isSubmit){
-        navigate("./income");
+
+      if(user.loginAuth(formValues.username, formValues.email, formValues.password)){
+
+        if(Object.keys(formErrors).length === 0 && isSubmit){
+          navigate("./income");
+        }
       }
   };
 

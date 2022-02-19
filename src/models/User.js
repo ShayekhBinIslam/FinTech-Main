@@ -1,5 +1,6 @@
 const db = require('../utilDB/database');
 const income = require('../models/Income');
+// import {pool} from '../utilDB/database'; 
 
 module.exports = class User{
     constructor(id,name,email){
@@ -17,7 +18,16 @@ module.exports = class User{
     }
     static updateIncome(title,ammount){
         return income.editIncome(title,ammount,this.id);
+    }
 
+    static loginAuth(username, password, email){
+        // pool.query('select * from client where clientid=?', [],(err, result, fields) => {
+        //     if(err){
+        //         return console.log(err);
+        //     }
+        //     return console.log(result);
+        // })
 
+        console.log(db.execute("SELECT * FROM CLIENT"));
     }
 }
