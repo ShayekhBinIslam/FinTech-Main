@@ -2,5 +2,5 @@
     "host" : "localhost",
     "user" : "root",
     "database" : "mydb",
-    "password" : "1234"
+    "password" : "Hello123!"
 }

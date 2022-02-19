@@ -9,7 +9,7 @@ module.exports = class User{
         this.email = email;
     }
     static getIncome(clientID){
-        return db.execute("SELECT * FROM INCOME WHERE clientID='" + clientID +"' ");
+        // return db.execute("SELECT * FROM INCOME WHERE clientID='" + clientID +"' ");
     }
     static addNewIncome(income){
         //THIS CAN BE EDITED ACCORDING TO PASSING INFO
