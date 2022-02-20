@@ -2,31 +2,36 @@
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { incomeList } from './JsonList';
-
 import '../../components/forms/editincome.css';
+import { useNavigate } from "react-router-dom";
 
-class List extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      products: incomeList
+
+export var selectedId = 1;
+
+
+export default function List() {
+
+
+  // const initialValues = {id : "", title : "", amount: "", period:"", status:""};  
+  // const [formValues, setFromValues] = useState(initialValues);
+
+  const products = incomeList;
+
+  const navigate = useNavigate();
+
+   function handle(product){
+          selectedId = product.id;
+          console.log(selectedId);
+           if(product.period>0){
+            navigate("./edit_periodic_income");
+          }
+          else{
+            navigate("./edit_one_time_income");
+          }
     }
-  }
 
-  componentDidMount() {
-    this.state.products = incomeList;
-  }
 
-  render() {
-    const { error, products} = this.state;
-
-    if(error) {
-      return (
-        <div>Error: {error.message}</div>
-      )
-    } else {
-      return(
+  return(
         <div className='incometable'>
           <h2>Income List</h2>
           <Table>
@@ -47,15 +52,16 @@ class List extends React.Component {
                   <td>{product.period}</td>
                   <td>{product.end}</td>
                   <td>{product.status}</td>
-                  <td><Button variant="info" onClick={() => this.props.editProduct(product.id)}>Edit</Button></td>
+                  <td><Button 
+                    
+                    onClick={()=>handle(product)}
+                    
+                    >Edit</Button></td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </div>
-      )
-    }
-  }
+      );
 }
 
-export default List;

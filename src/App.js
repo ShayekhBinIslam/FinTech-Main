@@ -8,6 +8,8 @@ import Login from "./Pages/login/Login";
 import AddOneTimeincome from "./Pages/addincome/AddOneTimeincome";
 import AddPeriodicincome from "./Pages/addincome/AddPeriodicincome";
 import Editincome from "./Pages/editincome/Editincome";
+import EditOneTime from "./components/forms/EditOneTime";
+import EditPeriodic from "./components/forms/EditPeriodic";
 import axios from 'axios';
 import qs from 'qs';
 
@@ -41,8 +43,18 @@ function App() {
     // data: data
   }).then(function(res){ return res.json(); });
   // .then(function(data2){ JSON.stringify(data2) });
+  // fetch("/login", {
+  //   method: 'POST',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json'
+  //   },
+  //   data: JSON.stringify({"id": 1234})
+  //   // data: data
+  // }).then(function(res){ return res.json(); })
+  // .then(function(data){ JSON.stringify(data) });
 
-  // axios
+  //  axios
   //     .post('/login', qs.stringify({"id": 1234}))
   //     .then(() => console.log('Book Created'))
   //     .catch(err => {
@@ -63,6 +75,8 @@ function App() {
           <Route path="/income/add_one_time_income" element={<AddOneTimeincome/>}/>
           <Route path="/income/add_periodic_income" element={<AddPeriodicincome/>}/>
           <Route path="/income/editincome" element={<Editincome/>}/>
+          <Route path="/income/editincome/edit_one_time_income" element={<EditOneTime/>}/>
+          <Route path="/income/editincome/edit_periodic_income" element={<EditPeriodic/>}/>
 
         </Routes>
        

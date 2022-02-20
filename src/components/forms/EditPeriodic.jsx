@@ -3,12 +3,21 @@ import { useState, useEffect } from 'react';
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
 
+import { incomeList } from './JsonList';
+ import { selectedId } from './list';
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function AddPeriodicincomeform() {
+export default function EditPeriodic() {
+
+  
+
   const initialValues = 
   {title : "", amount : "", period: "", start: "", end: "", shortdsc: ""};  
+
+  
+
   const [formValues, setFromValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [ isSubmit, setIsSubmit] = useState(false);  
@@ -16,6 +25,16 @@ export default function AddPeriodicincomeform() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+
+  for (var i=0; i < incomeList.length; i++) {
+    console.log(incomeList[i]);
+    if(selectedId==incomeList[i].id){
+        initialValues.title = incomeList[i].title;
+        initialValues.amount = incomeList[i].amount;
+        initialValues.period = incomeList[i].period;
+        initialValues.end = incomeList[i].end;
+    }
+   }
 
   const navigate = useNavigate();
 
@@ -77,7 +96,7 @@ export default function AddPeriodicincomeform() {
       )}      */}
 
       <form onSubmit={handleSubmit}>
-          <h1>Add Periodic Income</h1>
+          <h1>Edit Periodic Income</h1>
           <div className="uidivider"></div>
           <div className="uiform">
               

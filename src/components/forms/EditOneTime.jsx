@@ -3,12 +3,23 @@ import { useState, useEffect } from 'react';
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
 
+import { incomeList } from './JsonList';
+ import { selectedId } from './list';
 
-export default function AddOneTimeincomeform() {
+
+export default function EditOneTime() {
   const initialValues = {title : "", amount : "", shortdsc: ""};  
   const [formValues, setFromValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [ isSubmit, setIsSubmit] = useState(false);  
+
+  for (var i=0; i < incomeList.length; i++) {
+    console.log(incomeList[i]);
+    if(selectedId==incomeList[i].id){
+        initialValues.title = incomeList[i].title;
+        initialValues.amount = incomeList[i].amount;
+    }
+   }
 
   const navigate = useNavigate();
 
@@ -54,7 +65,7 @@ export default function AddOneTimeincomeform() {
     <div className='logincontainer'>
 
       <form onSubmit={handleSubmit}>
-          <h1>Add One Time Income</h1>
+          <h1>Edit One Time Income</h1>
           <div className="uidivider"></div>
           <div className="uiform">
               

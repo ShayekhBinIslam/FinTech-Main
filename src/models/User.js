@@ -28,6 +28,6 @@ module.exports = class User{
         //     return console.log(result);
         // })
 
-        console.log(db.execute("SELECT * FROM CLIENT"));
+        // console.log(db.execute("SELECT * FROM CLIENT"));
     }
 }
