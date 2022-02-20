@@ -66,25 +66,24 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 100, max: 100000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    // {
-    //   label: 'Dataset 2',
-    //   data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    //   borderColor: 'rgb(53, 162, 235)',
-    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    // },
-  ],
+const month_map = {
+  1: 'January',
+  2: 'February',
+  3: 'March',
+  4: 'April',
+  5: 'May',
+  6: 'June',
+  7: 'July',
+  8: 'August',
+  9: 'September',
+  10: 'October',
+  11: 'November',
+  12: 'December',
 };
+
+
 
 
 const StyledMenu = styled((props) => (
@@ -137,13 +136,8 @@ function handleNext() {
   console.log("Next clicked");
 }
 
-function handleMonthly() {
-  console.log("Monthly clicked");
-}
+// var monthly = 1;
 
-function handleYearly() {
-  console.log("Yearly clicked");
-}
 
 var incomechartdata = []
 var loading = true
@@ -215,16 +209,37 @@ function ChartChild({items}) {
     setAnchorEl(null);
   };
 
+  const [monthly, setMonthly] = React.useState(null);
+  // setMonthly(0);
+
+
+  const handleMonthly = () => {
+    console.log("Monthly clicked");
+    // monthly = 1;
+    setMonthly(1);
+    // forceUpdate();
+  }
+
+  const  handleYearly = () => {
+    console.log("Yearly clicked");
+    // monthly = 0;
+    setMonthly(0);
+    // forceUpdate();
+  }
+
+  // useEffect(()=> {
+  
+  // }, [monthly]);
+
   items = JSON.parse(items)
 
   console.log(items.length)
   console.log(items[0])
   console.log(items[0].title)
   var amounts = {}
-  
   for (var j = 0; j < items.length; ++j) {
     // console.log(items[j].year)
-    if (2021 <= items[j].year && items[j].year <= 2022) {
+    if (2016 <= items[j].year && items[j].year <= 2022) {
       if (amounts[items[j].year] == undefined) {
         amounts[items[j].year] = {}
       }
@@ -232,28 +247,86 @@ function ChartChild({items}) {
         amounts[items[j].year][items[j].month] = 0;
       }
     
-      if (items[j].year === 2021) {
-        if (8 <= items[j].month && items[j].month <=12) {  
-          // amounts[items[j].year][items[j].month] +=  items[j].       
-        }
-      }
-      else if (items[j].year === 2022 && items[j].month === 1) {
-        
-      }
+      // if (items[j].year === 2021) {
+      //   if (8 <= items[j].month && items[j].month <=12) {  
+      //     amounts[items[j].year][items[j].month] +=  items[j].amount;
+      //   }
+      // }
+      // else if (items[j].year === 2022 && items[j].month === 1) {
+      //   amounts[items[j].year][items[j].month] +=  items[j].amount;        
+      // }
+      amounts[items[j].year][items[j].month] +=  items[j].amount;      
     }
   }
+  console.log(amounts)
+  var incomedata = [];
 
-  // items.foreach((element, index, array) => {
-  //   console.log(element.title); // 100, 200, 300
-  //   console.log(index); // 0, 1, 2
-  //   console.log(array); // same myArray object 3 times
-  // });
+  if (monthly === 1) 
+  {    
+    
+    labels = []
+    incomedata = []
+    for (var j = 8; j <= 12; ++j) {
+      labels.push(month_map[j]);
+      incomedata.push(amounts[2021][j]);
+    }
+    labels.push(month_map[1]);
+    // incomedata.push(amounts[2022][1]);
+
+
+    // items.foreach((element, index, array) => {
+    //   console.log(element.title); // 100, 200, 300
+    //   console.log(index); // 0, 1, 2
+    //   console.log(array); // same myArray object 3 times
+    // });
+
+  }
+  else {
+    labels = []
+    incomedata = []
+
+    for (var j = 2017; j < 2022; ++j) {
+      labels.push(j);
+      var sum_val = 0
+      for (var k = 1; k <= 12; ++k) {
+        if (amounts[j] != undefined) {
+          if (amounts[j][k] != undefined) {
+            sum_val += amounts[j][k];
+          }
+        }
+      }
+      incomedata.push(sum_val);
+    }
+
+  }
+
+
+    
+
+  var data = {
+    labels,
+    datasets: [
+      {
+        // label: 'Dataset 1',
+        // data: labels.map(() => faker.datatype.number({ min: 100, max: 100000 })),
+        data: labels.map((elem, idx) => incomedata[idx]),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      // {
+      //   label: 'Dataset 2',
+      //   data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      //   borderColor: 'rgb(53, 162, 235)',
+      //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      // },
+    ],
+  };
 
 
   
   return (
     <div className='chart'>
-      {items[0].title}
+      {/* {items[0].title} */}
 
       <h3 className="chartTitle">Income Graph</h3>
       <Box
@@ -272,8 +345,8 @@ function ChartChild({items}) {
         {/* Monthly or yearly */}
         <ButtonGroup variant="contained" aria-label="outlined primary button group"
         >
-          <Button>Monthly</Button>
-          <Button>Yearly</Button>
+          <Button onClick={handleMonthly}>Monthly</Button>
+          <Button onClick={handleYearly}>Yearly</Button>
         </ButtonGroup>
       </Box>
 

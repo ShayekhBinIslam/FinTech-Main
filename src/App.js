@@ -27,6 +27,9 @@ function App() {
 
   // var data = new FormData();
   // data.append( "json", JSON.stringify( {"id": 1234} ) );
+
+  const [data, setData] = React.useState({"id": 1234});
+  // setData({"id": 1234})
   
   fetch("/login", {
     method: 'POST',
@@ -36,8 +39,8 @@ function App() {
     },
     data: JSON.stringify({"id": 1234})
     // data: data
-  }).then(function(res){ return res.json(); })
-  .then(function(data){ JSON.stringify(data) });
+  }).then(function(res){ return res.json(); });
+  // .then(function(data2){ JSON.stringify(data2) });
 
   // axios
   //     .post('/login', qs.stringify({"id": 1234}))
