@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // https://stackblitz.com/edit/drop-down-menu-material-ui
 // import DropDownMenu from 'material-ui/DropDownMenu';
 // import MenuItem from 'material-ui/MenuItem';
@@ -87,8 +87,6 @@ export const data = {
 };
 
 
-
-
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -147,7 +145,67 @@ function handleYearly() {
   console.log("Yearly clicked");
 }
 
+var incomechartdata = []
+var loading = true
+
 export default function Chart() {
+
+  incomechartdata = []
+  // loading = true
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await fetch("/getincomechartdata").then(res=> {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //     }).then(jsonResponse => console.log(jsonResponse));
+  //     // })
+  //     // .then(jsonResponse => {incomechartdata.push(jsonResponse);});
+  //   }
+  //   fetchData();
+    
+  // }, []);
+  // const [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState(null);
+
+  fetch("/getincomechartdata").then(res=> {
+    if (res.ok) {
+      return res.json();
+    }
+    // else {
+    //   return "error";
+    // }
+  })
+  // .then(jsonResponse => console.log(jsonResponse))
+  // .catch(() => {alert('failed to fetch');})
+  
+  // .then(res => res.json)
+  .then(dat => setItems(dat));
+  // if (items)
+  //   setItems(JSON.parse(items))
+
+  // while (loading);
+
+  console.log("Here")
+  // console.log(incomechartdata)
+  console.log(items)
+  // if (incomechartdata.length === 0) {
+  //   return "Loading";
+  // }
+
+
+  // The plot
+  // var node = document.createElement('div');
+
+  return (
+    <div className='chart'>
+      {items &&  <ChartChild items={items}/>}
+    </div>
+  );
+}
+
+function ChartChild({items}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -157,11 +215,46 @@ export default function Chart() {
     setAnchorEl(null);
   };
 
-  // The plot
-  // var node = document.createElement('div');
+  items = JSON.parse(items)
+
+  console.log(items.length)
+  console.log(items[0])
+  console.log(items[0].title)
+  var amounts = {}
+  
+  for (var j = 0; j < items.length; ++j) {
+    // console.log(items[j].year)
+    if (2021 <= items[j].year && items[j].year <= 2022) {
+      if (amounts[items[j].year] == undefined) {
+        amounts[items[j].year] = {}
+      }
+      if (amounts[items[j].year][items[j].month] == undefined) {
+        amounts[items[j].year][items[j].month] = 0;
+      }
+    
+      if (items[j].year === 2021) {
+        if (8 <= items[j].month && items[j].month <=12) {  
+          // amounts[items[j].year][items[j].month] +=  items[j].       
+        }
+      }
+      else if (items[j].year === 2022 && items[j].month === 1) {
+        
+      }
+    }
+  }
+
+  // items.foreach((element, index, array) => {
+  //   console.log(element.title); // 100, 200, 300
+  //   console.log(index); // 0, 1, 2
+  //   console.log(array); // same myArray object 3 times
+  // });
+
+
   
   return (
     <div className='chart'>
+      {items[0].title}
+
       <h3 className="chartTitle">Income Graph</h3>
       <Box
         sx={{
@@ -230,12 +323,10 @@ export default function Chart() {
 
       </Box>
 
-
-
-
       {/* Line plot */}
       <Line options={options} data={data} />
 
     </div>
   );
 }
+

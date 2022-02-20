@@ -35,31 +35,31 @@ def add_onetime_income(mydb):
     # for month in range(1, 12 + 1):
   
   clientID = 1
-  for i in range(50):
-    title = fake.text().split(" ")[0]
-    desc = " ".join(fake.sentence().split(" ")[:5])
-    # amount = 1000
-    # time = datetime.datetime(2009, 5, 5)
-    amount = random.randint(1000, 1000000)
-    # time = datetime.datetime(random.randint(2016, 2021), random.randint(1, 12), random.randint())
-    time = fake.date_between_dates(datetime.datetime(2016, 1, 1), datetime.datetime(2022, 1, 31))
+  # for i in range(50):
+  #   title = fake.text().split(" ")[0]
+  #   desc = " ".join(fake.sentence().split(" ")[:5])
+  #   # amount = 1000
+  #   # time = datetime.datetime(2009, 5, 5)
+  #   amount = random.randint(1000, 1000000)
+  #   # time = datetime.datetime(random.randint(2016, 2021), random.randint(1, 12), random.randint())
+  #   time = fake.date_between_dates(datetime.datetime(2016, 1, 1), datetime.datetime(2022, 1, 31))
 
 
-    sql = "INSERT INTO Income (title, amount, description, clientID) VALUES (%s, %s, %s, %s)"
-    val = (title, amount, desc, clientID)
-    # print(title, desc, time)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    print(mycursor.rowcount, "record inserted.")
+  #   sql = "INSERT INTO Income (title, amount, description, clientID) VALUES (%s, %s, %s, %s)"
+  #   val = (title, amount, desc, clientID)
+  #   # print(title, desc, time)
+  #   mycursor.execute(sql, val)
+  #   mydb.commit()
+  #   print(mycursor.rowcount, "record inserted.")
     
-    incomeID = mycursor.lastrowid
+  #   incomeID = mycursor.lastrowid
 
-    sql = "INSERT INTO oneTimeIncome (time, IncomeID, clientID) VALUES (%s, %s, %s)"
-    val = (time, incomeID, clientID)
-    # print(title, desc, time)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    print(mycursor.rowcount, "record inserted.")
+  #   sql = "INSERT INTO oneTimeIncome (time, IncomeID, clientID) VALUES (%s, %s, %s)"
+  #   val = (time, incomeID, clientID)
+  #   # print(title, desc, time)
+  #   mycursor.execute(sql, val)
+  #   mydb.commit()
+  #   print(mycursor.rowcount, "record inserted.")
   
   for i in range(50):
     title = fake.text().split(" ")[0]
@@ -79,13 +79,18 @@ def add_onetime_income(mydb):
     
     incomeID = mycursor.lastrowid
 
-    period = datetime.datetime
+    period = datetime.timedelta(0, random.randint(1, 11), 0).total_seconds()
     start_time = fake.date_between_dates(datetime.datetime(2016, 1, 1), datetime.datetime(2022, 1, 31))
     end_time = fake.date_between_dates(start_time, datetime.datetime(2022, 1, 31))
 
+    while start_time + period < end_time:
+      period = datetime.datetime
+      start_time = fake.date_between_dates(datetime.datetime(2016, 1, 1), datetime.datetime(2022, 1, 31))
+      end_time = fake.date_between_dates(start_time, datetime.datetime(2022, 1, 31))
 
-    sql = "INSERT INTO periodicIncome (time, IncomeID, clientID) VALUES (%s, %s, %s)"
-    val = (time, incomeID, clientID)
+
+    sql = "INSERT INTO periodicIncome (period, startTime, endTime, IncomeID, clientID) VALUES (%s, %s, %s)"
+    val = (period, start_time, end_time, incomeID, clientID)
     # print(title, desc, time)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -103,7 +108,7 @@ mydb = mysql.connector.connect(
   database="mydb"
 )
 
-add_client(mydb)
+# add_client(mydb)
 add_onetime_income(mydb)
 
 
