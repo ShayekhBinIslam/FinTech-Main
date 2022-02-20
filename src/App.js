@@ -33,13 +33,28 @@ function App() {
   // fetch("/login", {
   //   method: 'POST',
   //   headers: {
-  //     'Accept': 'application/json',
+  //     // 'Accept': 'application/json',
   //     'Content-Type': 'application/json'
   //   },
-  //   data: JSON.stringify({"id": 1234})
+  //   body: JSON.stringify({"id": 1234})
   //   // data: data
-  // }).then(function(res){ return res.json(); })
-  // .then(function(data){ JSON.stringify(data) });
+  // }).then(response => response.json())
+  // .then(data => this.setState({ postId: data.id }));
+
+  (async () => {
+    const rawResponse = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: {a: 1, b: 'Textual content'}
+    });
+    const content = await rawResponse.json();
+  
+    console.log(content);
+  })()
+
 
   //  axios
   //     .post('/login', qs.stringify({"id": 1234}))

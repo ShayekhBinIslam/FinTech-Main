@@ -12,7 +12,7 @@ const user = require('../../models/User');
 
 
 async function sendlogin(){
-  const response = await axios.get(
+  const response = await axios.post(
     "http://localhost:5000/login",
     {
       params: {
@@ -23,6 +23,21 @@ async function sendlogin(){
   );
 
   console.log(response.data);
+
+
+  // (async () => {
+  //   const rawResponse = await fetch('/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: {a: 1, b: 'Textual content'}
+  //   });
+  //   const content = await rawResponse.json();
+  
+  //   console.log(content);
+  // })()
 }
 
 
