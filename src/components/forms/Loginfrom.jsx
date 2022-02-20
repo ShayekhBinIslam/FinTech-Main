@@ -1,8 +1,29 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+
+import axios from 'axios';
+import qs from 'qs';
+
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
 const user = require('../../models/User');
+
+
+
+
+async function sendlogin(){
+  const response = await axios.get(
+    "http://localhost:5000/login",
+    {
+      params: {
+        name: "tow",
+        pass: "cox"
+      }
+    }
+  );
+
+  console.log(response.data);
+}
 
 
 export default function Loginform() {
@@ -23,8 +44,8 @@ export default function Loginform() {
       setFormErrors(validate(formValues));
       setIsSubmit(true);
 
-
       // if(user.loginAuth(formValues.username, formValues.email, formValues.password)){
+      sendlogin();
 
         if(Object.keys(formErrors).length === 0 && isSubmit){
           navigate("./income");
@@ -65,15 +86,6 @@ export default function Loginform() {
   return (
 
     <div className='logincontainer'>
-
-
-      {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
-          <div className='successmsg'> Signed in successfully</div> 
-          
-      ) : (
-        // <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-        <pre></pre>
-      )}      */}
 
       <form onSubmit={handleSubmit}>
           <h1>Log in</h1>

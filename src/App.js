@@ -10,13 +10,47 @@ import AddPeriodicincome from "./Pages/addincome/AddPeriodicincome";
 import Editincome from "./Pages/editincome/Editincome";
 import EditOneTime from "./components/forms/EditOneTime";
 import EditPeriodic from "./components/forms/EditPeriodic";
+import axios from 'axios';
+import qs from 'qs';
 
 import {
   Routes,
   Route
 } from "react-router-dom";
 
+// import {useEffct} from 'react';
+
 function App() {
+  fetch("/getcurrentmonthincome").then(res=> {
+    if (res.ok) {
+      return res.json();
+    }
+  }).then(jsonResponse => console.log(jsonResponse));
+
+  // var data = new FormData();
+  // data.append( "json", JSON.stringify( {"id": 1234} ) );
+  
+  // fetch("/login", {
+  //   method: 'POST',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json'
+  //   },
+  //   data: JSON.stringify({"id": 1234})
+  //   // data: data
+  // }).then(function(res){ return res.json(); })
+  // .then(function(data){ JSON.stringify(data) });
+
+  //  axios
+  //     .post('/login', qs.stringify({"id": 1234}))
+  //     .then(() => console.log('Book Created'))
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+ 
+
+
+
   return (
     <div className="fintech">
       <Topbar/>
