@@ -8,21 +8,23 @@ import './incometable.css';
 
 import { useNavigate } from "react-router-dom";
 
+import { tableitems } from '../../components/chart/Chart'
 
-const rows: GridRowsProp = [
-  { id: 1, col1: 'Hello', col2: 'World' },
-  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-  { id: 3, col1: 'MUI', col2: 'is Amazing' },
-];
-
-const columns: GridColDef[] = [
-  { field: 'col1', headerName: 'Title', width: 150 },
-  { field: 'col2', headerName: 'Amount', width: 150 }
-];
-
+var thisyear = 2022;
+var thismonth = 2;
 
 export default function IncomeListTable() {
-  const products = incomeList;
+  const products = [];
+
+  for(var i=0; i<tableitems.length; i++){
+    if(tableitems[i].year==thisyear && tableitems[i].month==thismonth){
+      products[i].title = incomeList[i].title;
+      products[i].amount = incomeList[i].amount;
+      products[i].period = incomeList[i].period;
+    }
+  }
+
+  // const products = incomeList;
 
   const navigate = useNavigate();
 

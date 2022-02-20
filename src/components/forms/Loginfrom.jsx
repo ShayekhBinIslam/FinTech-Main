@@ -12,17 +12,17 @@ const user = require('../../models/User');
 
 
 async function sendlogin(){
-  const response = await axios.post(
-    "http://localhost:5000/login",
-    {
-      params: {
-        name: "tow",
-        pass: "cox"
-      }
-    }
-  );
+  // const response = await axios.post(
+  //   "http://localhost:5000/login",
+  //   {
+  //     params: {
+  //       name: "tow",
+  //       pass: "cox"
+  //     }
+  //   }
+  // );
 
-  console.log(response.data);
+  // console.log(response.data);
 
 
   // (async () => {
@@ -38,6 +38,24 @@ async function sendlogin(){
   
   //   console.log(content);
   // })()
+
+
+
+  const socket = new WebSocket('ws://localhost:3000');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+        console.log('Connected to WS Server')
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
+    });
+
+    //const sendMessage = () => {
+        socket.send('Hello From Client1!');
+    //}
 }
 
 

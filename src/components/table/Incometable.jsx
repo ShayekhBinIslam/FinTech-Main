@@ -5,10 +5,30 @@ import { Table } from 'react-bootstrap';
 
 import './incometable.css';
 
-
+import { charttablelabel, charttablevalue } from '../../components/chart/Chart'
 
 export default function Incometable() {
-  const products = incomeList;
+  
+  const products = [];
+  var avg = 0;
+
+  for(var i=0; i<charttablevalue.length; i++){
+    avg+=charttablevalue[i];
+  }
+
+  avg = avg/charttablevalue.length;
+
+  for(var i=0; i<charttablelabel.length; i++){
+    products[i].title = charttablelabel[i];
+    products[i].amount = charttablevalue[i];
+    if(charttablevalue[i]<avg){
+      products[i].period = "low";
+    }
+    else if(charttablevalue[i]===avg){
+      products[i].period = "ok";
+    }
+    else products[i].period = "high";
+  }
 
   return (
     <div className='incometable'>
@@ -18,7 +38,7 @@ export default function Incometable() {
               <tr>
                 <th>Title</th>
                 <th>Amount</th>
-                <th>Avg</th>
+                <th>compare to Avg</th>
                 {/* <th>End Date</th> */}
                 {/* <th>Status</th> */}
               </tr>

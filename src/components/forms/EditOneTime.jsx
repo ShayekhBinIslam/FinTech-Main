@@ -34,7 +34,7 @@ export default function EditOneTime() {
       setIsSubmit(true);
 
       if(Object.keys(formErrors).length === 0 && isSubmit){
-        navigate("./income");
+        navigate("./income/editincome");
       }
   };
 

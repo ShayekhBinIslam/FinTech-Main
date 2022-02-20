@@ -3,7 +3,7 @@
 # pip install Faker
 # export MYSQL_ROOT_PASS=""
 
-from matplotlib.pyplot import title
+#from matplotlib.pyplot import title
 import mysql.connector
 import os
 import datetime
@@ -104,7 +104,7 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   # export MYSQL_ROOT_PASS=""
-  password=os.environ.get("MYSQL_ROOT_PASS", None),
+  password=os.environ.get("MYSQL_ROOT_PASS", "1234"),
   database="mydb"
 )
 

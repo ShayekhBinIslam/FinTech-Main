@@ -54,7 +54,7 @@ export default function EditPeriodic() {
       setIsSubmit(true);
 
       if(Object.keys(formErrors).length === 0 && isSubmit){
-        navigate("/income");
+        navigate("/income/editincome");
       }
   };
 

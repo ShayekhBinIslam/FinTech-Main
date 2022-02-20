@@ -41,6 +41,10 @@ import "./chart.css";
 // import rd3 from 'react-d3-library';
 // import * as d3 from 'd3';
 
+export var tableitems = [];
+export var charttablelabel = [];
+export var charttablevalue = [];
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -232,6 +236,7 @@ function ChartChild({items}) {
   // }, [monthly]);
 
   items = JSON.parse(items)
+  tableitems = items;
 
   console.log(items.length)
   console.log(items[0])
@@ -268,9 +273,12 @@ function ChartChild({items}) {
     incomedata = []
     for (var j = 8; j <= 12; ++j) {
       labels.push(month_map[j]);
+      charttablelabel.push(month_map[j]);
       incomedata.push(amounts[2021][j]);
+      charttablevalue.push(amounts[2021][j]);
     }
     labels.push(month_map[1]);
+    charttablelabel.push(month_map[1]);
     // incomedata.push(amounts[2022][1]);
 
 
@@ -287,6 +295,7 @@ function ChartChild({items}) {
 
     for (var j = 2017; j < 2022; ++j) {
       labels.push(j);
+      charttablelabel.push(j);
       var sum_val = 0
       for (var k = 1; k <= 12; ++k) {
         if (amounts[j] != undefined) {
@@ -296,6 +305,7 @@ function ChartChild({items}) {
         }
       }
       incomedata.push(sum_val);
+      charttablevalue.push(sum_val);
     }
 
   }
