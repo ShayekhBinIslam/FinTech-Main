@@ -11,7 +11,6 @@ Some of the features of FinTech include:
 - Budget creation and management
 - Goal setting and progress tracking
 - Interactive visualizations and reports
-- Multi-currency support
 
 ## Requirements
 
